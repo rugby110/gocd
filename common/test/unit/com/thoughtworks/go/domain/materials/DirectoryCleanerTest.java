@@ -18,12 +18,14 @@ package com.thoughtworks.go.domain.materials;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.TestFileUtil;
 import com.thoughtworks.go.util.command.InMemoryStreamConsumer;
 import com.thoughtworks.go.util.command.ProcessOutputStreamConsumer;
 import static org.hamcrest.Matchers.is;
+
 import org.junit.After;
 import org.junit.Assert;
 import static org.junit.Assert.assertThat;
@@ -33,6 +35,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 
 public class DirectoryCleanerTest {
     private File baseFolder;
+    private File anotherFolder;
     private DirectoryCleaner cleaner;
     private InMemoryStreamConsumer consumer;
 
@@ -46,6 +49,9 @@ public class DirectoryCleanerTest {
     @After
     public void removeBaseDirectory() {
         FileUtil.deleteFolder(baseFolder);
+        if (anotherFolder != null && anotherFolder.exists()) {
+            FileUtil.deleteFolder(anotherFolder);
+        }
     }
 
     @Test
@@ -193,5 +199,25 @@ public class DirectoryCleanerTest {
 
         assertThat(consumer.getStdOut(), containsString("Deleting folder " + notAllowedFolder.getPath()));
         assertThat(consumer.getStdOut(), containsString("Keeping folder " + allowedFolder.getPath()));
+    }
+
+    @Test
+    public void shouldDeleteSymlinksButNotFollowThem() throws Exception {
+        anotherFolder = TestFileUtil.createTempFolder("linkedFolder");
+        File link = new File(baseFolder, "link");
+        Files.createSymbolicLink(link.toPath(),
+                anotherFolder.toPath());
+        File fileInLinkedFolder = new File(anotherFolder, "test");
+        fileInLinkedFolder.createNewFile();
+
+        File allowedFolder = new File(baseFolder, "subfolder/allowed");
+        allowedFolder.mkdirs();
+
+        cleaner.allowed("subfolder/allowed");
+        cleaner.clean();
+
+        assertThat("Symlink should have been removed", link.exists(), is(false));
+        assertThat("Contents of symlinked directory should not have been removed",
+                fileInLinkedFolder.exists(), is(true));
     }
 }
