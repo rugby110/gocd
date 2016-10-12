@@ -25,7 +25,7 @@ import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.work.GoPublisher;
 import org.apache.log4j.Logger;
 
-import static org.apache.commons.io.FileUtils.deleteQuietly;
+import static com.thoughtworks.go.util.FileUtil.deleteQuietly;
 
 public class ChecksumFileHandler implements FetchHandler {
 

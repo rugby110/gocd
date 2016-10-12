@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.OperatingSystem;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.go.util.ZipUtil;
@@ -112,7 +113,7 @@ public class DefaultPluginJarChangeListener implements PluginJarChangeListener {
     private void removePlugin(GoPluginDescriptor descriptor) {
         GoPluginDescriptor descriptorOfRemovedPlugin = registry.unloadPlugin(descriptor);
         goPluginOSGiFramework.unloadPlugin(descriptorOfRemovedPlugin);
-        boolean bundleLocationHasBeenDeleted = FileUtils.deleteQuietly(descriptorOfRemovedPlugin.bundleLocation());
+        boolean bundleLocationHasBeenDeleted = FileUtil.deleteQuietly(descriptorOfRemovedPlugin.bundleLocation());
         if (!bundleLocationHasBeenDeleted) {
             throw new RuntimeException(String.format("Failed to remove bundle jar %s from bundle location %s", descriptorOfRemovedPlugin.fileName(), descriptorOfRemovedPlugin.bundleLocation()));
         }
@@ -199,7 +200,7 @@ public class DefaultPluginJarChangeListener implements PluginJarChangeListener {
     }
 
     private void wipePluginBundleDirectory(File pluginBundleDirectory) {
-        if (pluginBundleDirectory.exists() && !FileUtils.deleteQuietly(pluginBundleDirectory)) {
+        if (pluginBundleDirectory.exists() && !FileUtil.deleteQuietly(pluginBundleDirectory)) {
             throw new RuntimeException(String.format("Failed to delete bundle directory %s", pluginBundleDirectory));
         }
         pluginBundleDirectory.mkdirs();

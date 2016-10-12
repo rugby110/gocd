@@ -20,6 +20,7 @@ import com.thoughtworks.cruise.agent.common.launcher.AgentLauncher;
 import com.thoughtworks.cruise.agent.common.launcher.AgentLaunchDescriptor;
 import com.thoughtworks.go.agent.common.util.Downloader;
 import com.thoughtworks.go.agent.common.util.JarUtil;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
@@ -88,7 +89,7 @@ public class DefaultAgentLauncherCreatorImpl implements AgentLauncherCreator {
 
             LOG.info("Attempt No: " + (retryCount + 1) + " to cleanup launcher temp files");
 
-            FileUtils.deleteQuietly(inUseLauncher);
+            FileUtil.deleteQuietly(inUseLauncher);
             JarUtil.cleanup(inUseLauncher.getName());
 
             ++retryCount;

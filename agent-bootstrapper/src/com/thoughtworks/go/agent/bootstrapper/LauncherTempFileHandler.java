@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.thoughtworks.go.agent.common.util.JarUtil;
-import org.apache.commons.io.FileUtils;
+import com.thoughtworks.go.util.FileUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,7 +55,7 @@ class LauncherTempFileHandler implements Runnable {
             Set<String> fileSet = new HashSet<>(fileList);
             for (String fileName : fileSet) {
                 File file = new File(fileName);
-                FileUtils.deleteQuietly(file);
+                FileUtil.deleteQuietly(file);
                 JarUtil.cleanup(fileName);
                 if (!file.exists() && !JarUtil.tempFileExist(fileName)) {
                     fileList.remove(fileName);

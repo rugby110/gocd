@@ -19,6 +19,7 @@ package com.thoughtworks.go.config;
 
 import com.thoughtworks.go.security.CipherProvider;
 import com.thoughtworks.go.security.GoCipher;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.go.util.TimeProvider;
 import com.thoughtworks.go.util.XmlUtils;
@@ -79,8 +80,8 @@ public class ConfigCipherUpdater {
 
             if (new String(newCipher).equals(new String(oldCipher))) {
                 LOGGER.warn("Unable to generate a new safe cipher. Your cipher is unsafe.");
-                FileUtils.deleteQuietly(backupCipherFile);
-                FileUtils.deleteQuietly(backupConfigFile);
+                FileUtil.deleteQuietly(backupCipherFile);
+                FileUtil.deleteQuietly(backupConfigFile);
                 return;
             }
             Document document = new SAXBuilder().build(configFile);

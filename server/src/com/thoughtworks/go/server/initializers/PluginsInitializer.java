@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.zip.ZipInputStream;
 
 import com.thoughtworks.go.server.util.ServerVersion;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.go.util.ZipUtil;
 import com.thoughtworks.go.plugin.infra.PluginManager;
@@ -77,7 +78,7 @@ public class PluginsInitializer implements Initializer {
     }
 
     private void cleanupOldPluginDirectories() {
-        FileUtils.deleteQuietly(new File("plugins_bundles"));
-        FileUtils.deleteQuietly(new File("plugins-new"));
+        FileUtil.deleteQuietly(new File("plugins_bundles"));
+        FileUtil.deleteQuietly(new File("plugins-new"));
     }
 }

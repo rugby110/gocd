@@ -28,13 +28,13 @@ import java.util.zip.GZIPOutputStream;
 import java.util.UUID;
 
 import com.thoughtworks.go.domain.StageIdentifier;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.studios.shine.ShineRuntimeException;
 import com.thoughtworks.studios.shine.cruise.GoOntology;
 import com.thoughtworks.studios.shine.semweb.BoundVariables;
 import com.thoughtworks.studios.shine.semweb.Graph;
 import com.thoughtworks.studios.shine.semweb.sesame.InMemoryTempGraphFactory;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -145,7 +145,7 @@ public class StageStorage implements StageGraphLoader {
 
     // with great power comes great responsibility
     public void clear() {
-        FileUtils.deleteQuietly(new File(baseDir));
+        FileUtil.deleteQuietly(new File(baseDir));
     }
 }
 
