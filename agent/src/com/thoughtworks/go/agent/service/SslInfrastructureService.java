@@ -25,10 +25,10 @@ import com.thoughtworks.go.security.KeyStoreManager;
 import com.thoughtworks.go.security.Registration;
 import com.thoughtworks.go.security.RegistrationJSONizer;
 import com.thoughtworks.go.server.service.AgentRuntimeInfo;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.go.util.SystemUtil;
 import com.thoughtworks.go.util.URLService;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.NullInputStream;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -144,8 +144,8 @@ public class SslInfrastructureService {
     }
 
     private void deleteKeyStores() {
-        FileUtils.deleteQuietly(GoAgentServerHttpClientBuilder.AGENT_CERTIFICATE_FILE);
-        FileUtils.deleteQuietly(GoAgentServerHttpClientBuilder.AGENT_TRUST_FILE);
+        FileUtil.deleteQuietly(GoAgentServerHttpClientBuilder.AGENT_CERTIFICATE_FILE);
+        FileUtil.deleteQuietly(GoAgentServerHttpClientBuilder.AGENT_TRUST_FILE);
     }
 
     public static class RemoteRegistrationRequester {

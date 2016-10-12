@@ -20,9 +20,9 @@ package com.thoughtworks.go.domain.materials.tfs;
 import com.thoughtworks.go.domain.materials.Modification;
 import com.thoughtworks.go.domain.materials.Revision;
 import com.thoughtworks.go.domain.materials.SCMCommand;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.StringUtil;
 import com.thoughtworks.go.util.command.CommandArgument;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -83,7 +83,7 @@ public abstract class AbstractTfsCommand extends SCMCommand implements TfsComman
     public final void checkout(File workDir, Revision revision) {
         try {
             if (workDir.exists()) {
-                FileUtils.deleteQuietly(workDir);
+                FileUtil.deleteQuietly(workDir);
             }
             setupWorkspace(workDir);
             if (LOGGER.isDebugEnabled()) {

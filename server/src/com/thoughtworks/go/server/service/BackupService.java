@@ -43,6 +43,7 @@ import com.thoughtworks.go.server.util.ServerVersion;
 import com.thoughtworks.go.server.web.BackupStatusProvider;
 import com.thoughtworks.go.serverhealth.HealthStateType;
 import com.thoughtworks.go.service.ConfigRepository;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.go.util.TimeProvider;
 import com.thoughtworks.go.util.VoidThrowingFn;
@@ -130,7 +131,7 @@ public class BackupService implements BackupStatusProvider {
                 result.setMessage(LocalizedMessage.string("BACKUP_COMPLETED_SUCCESSFULLY"));
                 return serverBackup;
             } catch (Exception e) {
-                FileUtils.deleteQuietly(destDir);
+                FileUtil.deleteQuietly(destDir);
                 result.badRequest(LocalizedMessage.string("BACKUP_UNSUCCESSFUL", e.getMessage()));
                 LOGGER.error("[Backup] Failed to backup Go.", e);
                 mailSender.send(EmailMessageDrafter.backupFailedMessage(e.getMessage(), goConfigService.adminEmail()));

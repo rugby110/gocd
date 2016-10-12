@@ -31,7 +31,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-import org.apache.commons.io.FileUtils;
+import com.thoughtworks.go.util.FileUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -126,7 +126,7 @@ public class JarUtil {
 
     public static boolean cleanup(String inUseLauncher) {
         File depsDir = new File(EXPLODED_DEPENDENCIES_DIR_NAME, inUseLauncher);
-        return FileUtils.deleteQuietly(depsDir);
+        return FileUtil.deleteQuietly(depsDir);
     }
 
     public static boolean tempFileExist(String inUseLauncher) {

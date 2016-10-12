@@ -28,7 +28,6 @@ import com.thoughtworks.go.server.view.artifacts.ArtifactDirectoryChooser;
 import com.thoughtworks.go.server.view.artifacts.BuildIdArtifactLocator;
 import com.thoughtworks.go.server.view.artifacts.PathBasedArtifactsLocator;
 import com.thoughtworks.go.util.*;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -240,7 +239,7 @@ public class ArtifactsService implements ArtifactUrlReader {
     }
 
     private boolean deleteFile(File file) {
-        return FileUtils.deleteQuietly(file);
+        return FileUtil.deleteQuietly(file);
     }
 
 }

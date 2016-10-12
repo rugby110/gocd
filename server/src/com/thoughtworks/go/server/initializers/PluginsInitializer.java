@@ -18,6 +18,7 @@ package com.thoughtworks.go.server.initializers;
 
 import com.thoughtworks.go.plugin.infra.PluginManager;
 import com.thoughtworks.go.server.util.ServerVersion;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import com.thoughtworks.go.util.ZipUtil;
 import org.apache.commons.io.FileUtils;
@@ -77,7 +78,7 @@ public class PluginsInitializer implements Initializer {
     }
 
     private void cleanupOldPluginDirectories() {
-        FileUtils.deleteQuietly(new File("plugins_bundles"));
-        FileUtils.deleteQuietly(new File("plugins-new"));
+        FileUtil.deleteQuietly(new File("plugins_bundles"));
+        FileUtil.deleteQuietly(new File("plugins-new"));
     }
 }

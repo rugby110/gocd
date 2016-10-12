@@ -25,12 +25,12 @@ import com.thoughtworks.go.domain.materials.git.GitCommand;
 import com.thoughtworks.go.domain.materials.git.GitMaterialInstance;
 import com.thoughtworks.go.domain.materials.svn.MaterialUrl;
 import com.thoughtworks.go.server.transaction.TransactionSynchronizationManager;
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.GoConstants;
 import com.thoughtworks.go.util.StringUtil;
 import com.thoughtworks.go.util.command.InMemoryStreamConsumer;
 import com.thoughtworks.go.util.command.ProcessOutputStreamConsumer;
 import com.thoughtworks.go.util.command.UrlArgument;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.support.TransactionSynchronization;
@@ -231,7 +231,7 @@ public class GitMaterial extends ScmMaterial {
                     @Override
                     public void afterCompletion(int status) {
                         if (status != TransactionSynchronization.STATUS_COMMITTED) {
-                            FileUtils.deleteQuietly(workingFolder);
+                            FileUtil.deleteQuietly(workingFolder);
                         }
                     }
                 });

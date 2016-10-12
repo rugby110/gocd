@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import org.apache.commons.io.FileUtils;
+import com.thoughtworks.go.util.FileUtil;
 import org.apache.log4j.Logger;
 import org.h2.tools.RunScript;
 
@@ -90,7 +90,7 @@ public class Migrate {
         File newDatabaseFile = new File(fileNameWithoutExtension + ".h2.db");
         if(newDatabaseFile.exists()) {
             LOGGER.info("Removing " + newDatabaseFile.getAbsolutePath() + " [the new database file]");
-            FileUtils.deleteQuietly(newDatabaseFile);
+            FileUtil.deleteQuietly(newDatabaseFile);
         }
         if (!OLD_H2_FILE.exists()) {
             throw new IllegalStateException(String.format("h2 file %s not found, migration could not be completed successfully", OLD_H2_FILE.getAbsolutePath()));
