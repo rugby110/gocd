@@ -17,6 +17,7 @@
 
 package com.thoughtworks.go.security;
 
+import com.thoughtworks.go.util.FileUtil;
 import com.thoughtworks.go.util.SystemEnvironment;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -82,7 +83,7 @@ public class CipherProvider implements Serializable {
 
     public void resetCipher() {
         cachedKey = null;
-        FileUtils.deleteQuietly(environment.getCipherFile());
+        FileUtil.deleteQuietly(environment.getCipherFile());
         primeKeyCache();
     }
 }
